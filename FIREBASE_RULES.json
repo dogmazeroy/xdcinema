@@ -1,0 +1,29 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "rooms": {
+      "$roomId": {
+        ".read": "auth != null && data.child('members').child(auth.uid).val() === true",
+        ".write": "auth != null && !data.exists() && newData.child('owner').val() === auth.uid && newData.child('members').child(auth.uid).val() === true",
+        "members": {
+          "$memberId": {
+            ".write": "auth != null && auth.uid === $memberId && !data.exists() && newData.val() === true && root.child('rooms').child($roomId).child('owner').exists()"
+          }
+        },
+        "state": {
+          ".write": "auth != null && root.child('rooms').child($roomId).child('members').child(auth.uid).val() === true"
+        },
+        "messages": {
+          "$messageId": {
+            ".write": "auth != null && !data.exists() && root.child('rooms').child($roomId).child('members').child(auth.uid).val() === true && newData.child('by').val() === auth.uid && newData.child('body').isString()"
+          }
+        }
+      }
+    }
+  }
+}
