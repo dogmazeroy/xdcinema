@@ -1,0 +1,29 @@
+INCONNU ARCHIVE — DRIVE EDITION
+
+Novidades:
+- Acervo real do Drive aparece imediatamente na página inicial e catálogo. Sem capa: pôster tipográfico de substituição.
+- Client ID público OAuth Web pré-configurado. Não colocar Client Secret nos arquivos.
+- Player do Google Drive (URL /file/d/ID/preview) usado como padrão para arquivos importados do Drive.
+- Reprodução local por <video> segue disponível com legendas SRT/VTT e progresso salvo.
+- Player Google Drive é externo: não é possível capturar posição nem carregar legenda .srt do celular dentro do iframe. Use as opções do player do Drive, se disponíveis.
+- Se a prévia falhar, botão ABRIR NO DRIVE abre o vídeo em drive.google.com. Algumas contas exigem login e podem bloquear cookies terceiros ou prévia.
+- A primeira sincronização requer conectar/autorizar Google Drive. Após expirar a sessão, repita a autorização; o Client ID permanece configurado.
+- Vídeos privados não ficam públicos no GitHub nem Vercel; a lista é salva no localStorage deste navegador. Outro aparelho/browser não terá o mesmo catálogo sem conectar Drive e sincronizar novamente.
+- O botão 'Mostrar títulos demonstrativos' nas configurações é opcional e vem desabilitado.
+
+PUBLICAR PELO CODESPACES:
+1. Extraia os arquivos deste ZIP dentro da raiz do repositório, e NÃO deixe index.html dentro de uma subpasta.
+2. Execute git add . && git commit -m "INCONNU ARCHIVE DRIVE" && git push origin main
+3. Vercel redeploy se integração GitHub estiver ativa; visite https://xdcinema.vercel.app/ e recarregue.
+4. Google Cloud: Authorized JavaScript origins: https://xdcinema.vercel.app; adicione seu Gmail em Usuários de teste se projeto estiver Em teste; ative Drive API.
+5. Abra INCONNU, toque em DRIVE e em Conectar conta Google, depois aguarde a sincronização.
+6. Caso tenha 136 filmes salvos anteriormente NO MESMO NAVEGADOR E DOMÍNIO, eles continuam no acervo por compatibilidade com a versão anterior.
+
+CLIENT ID público neste código: 895813505456-gouqdnvp2kv6bd2r3pifgroasbanljgt.apps.googleusercontent.com
+NÃO use o Client Secret antigo (GOCSPX-) ou qualquer segredo no front-end. Se ele foi exposto, revogue e gere um novo.
+
+NOTAS:
+- index.html/css/*.css/js/*.js compõem o projeto principal.
+- ABRIR_NO_CELULAR.html é uma versão offline para visualizar interface, sem OAuth: login Drive exige site HTTPS.
+- Fotos de capas são thumbnails do Drive quando disponíveis. Não há uma API de capas de cinema automaticamente configurada.
+- Firebase é opcional e exige seu projeto e regras apropriadas.
